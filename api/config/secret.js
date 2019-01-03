@@ -1,1 +1,1 @@
-module.exports = "coala_sw_auth_secret_0123456789";
+module.exports = "bosornd_site_auth_secret_0123456789";
