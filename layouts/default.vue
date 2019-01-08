@@ -67,7 +67,9 @@
     computed: {
       items: function(){
         return [
-          { icon: 'apps', title: 'Home', to: '/' },
+          { icon: 'home', title: 'Home', to: '/main' },
+          { icon: 'apps', title: 'Main Page', to: '/' },
+          { icon: 'face', title: 'My Page', to: '/me' },
         ];
       }
     },

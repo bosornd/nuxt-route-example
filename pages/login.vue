@@ -10,7 +10,7 @@
         @click:append="show_password = !show_password">
       </v-text-field>
       <v-btn @click="login">login</v-btn>
-      <v-btn to="/register" nuxt=true>register</v-btn>
+      <v-btn to="/register">register</v-btn>
     </v-form>
   </v-layout>
 </template>
@@ -36,10 +36,7 @@
             data: { username: this.username, password: this.password }
           })
           .then( res => {
-            const role = this.$auth.user.user.role
-            const name = this.$auth.user.user.username
-            var page = '/' + role + 's/' + name
-            this.$router.push(page)
+            this.$router.push({ name: 'me' })
           })
           .catch(e => {
             console.log(e)
