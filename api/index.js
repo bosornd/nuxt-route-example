@@ -20,7 +20,6 @@ const jwt = require('express-jwt')
 const site_secret = require('./config/secret')
 
 app.use('/auth', require('./auth'));
-app.use('/book', jwt({secret: site_secret}), require('./book'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
