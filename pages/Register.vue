@@ -14,7 +14,10 @@
         label="PASSWORD AGAIN" hint="need to be matched" counter
         @click:append="show_password = !show_password">
       </v-text-field>
+      <v-combobox v-model="role" label="ROLE" :items="roles" required>
+      </v-combobox>
       <v-btn @click="register">register</v-btn>
+      <v-text-field v-model="error" />
     </v-form>
   </v-layout>
 </template>
@@ -27,22 +30,29 @@
         username: '',
         password: '',
         password2: '',
+        role: 'architect',
+        roles: [
+          'architect',
+          'professor',
+          'manager',
+        ],
         rules: {
           required: value => !!value || 'Required',
           more_than_8: value => value.length >= 8 || 'More than 8 characters',
           same_password: value => value === this.password || 'Password mismatched'
         },
-        show_password: false
+        show_password: false,
+        error: ''
       }
     },
     methods: {
       async register(){
         if (this.$refs.form.validate()) {
           await this.$axios.post('api/auth/register', {
-            username: this.username, password: this.password
+            username: this.username, password: this.password, role: this.role
           })
           .then( res => {
-            this.$router.push({ name: 'Login'})
+            this.$router.push({ name: 'login'})
           })
           .catch(err => {
             this.$refs.form.reset()

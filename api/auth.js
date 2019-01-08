@@ -45,12 +45,13 @@ router.post('/logout', (req, res, next) => {
 
 // [POST] /register
 router.post('/register', function(req, res) {
-  if (!req.body.username || !req.body.password) {
+  if (!req.body.username || !req.body.password || !req.body.role) {
     res.json({success: false, msg: 'Please pass username and password.'});
   } else {
     var newUser = new User({
       username: req.body.username,
-      password: req.body.password
+      password: req.body.password,
+      role: req.body.role,
     });
     // save the user
     newUser.save(function(err) {
