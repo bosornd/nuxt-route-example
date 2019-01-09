@@ -23,7 +23,8 @@ router.post('/login', (req, res, next) => {
       user.comparePassword(req.body.password, function (err, isMatch) {
         if (isMatch && !err) {
           // site_secret should be same with express-jwt (index.js)
-          const accessToken = jsonwebtoken.sign({ user }, site_secret)
+          const accessToken = jsonwebtoken.sign({ name: user.username, role: user.role }, site_secret)
+//          const accessToken = jsonwebtoken.sign({ user }, site_secret)
           res.json({ token: { accessToken } })
         } else {
           res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
